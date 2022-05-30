@@ -1,0 +1,7 @@
+<ul>
+    <% @courses.each do |course| %>        
+        <li>
+        <%= link_to course.title, show_course_path(id:course.id)%>
+        </li>
+    <% end %>
+</ul>
