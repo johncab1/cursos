@@ -4,7 +4,7 @@ class CreateVideos < ActiveRecord::Migration[7.0]
       t.string :title
       t.string :description
       t.integer :duration
-      t.boolean :visible
+      t.boolean :visible, default: false
 
       t.timestamps
     end
