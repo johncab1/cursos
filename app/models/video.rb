@@ -7,8 +7,15 @@ class Video < ApplicationRecord
 
   before_save :send_notification
   after_save :send_mail, if: :has_description?
+  after_update :show_title
+  scope :has_duration, -> { where('duration >= ?', 0)}
+  scope :has_description, -> { where.not(description: nil)}
+  scope :has_description_duration, -> { has_description.has_duration }
 
   private
+  def show_title
+    puts "nos encontramos en el metodo show_title"
+  end
   def send_notification
     puts "Nuevo video!!"
   end
