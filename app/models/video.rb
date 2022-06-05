@@ -1,4 +1,22 @@
+# == Schema Information
+#
+# Table name: videos
+#
+#  id          :integer          not null, primary key
+#  title       :string
+#  description :string
+#  duration    :integer
+#  visible     :boolean          default(FALSE)
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  course_id   :integer          not null
+#
 class Video < ApplicationRecord
+
+  belongs_to :course
+  has_many :video_categories
+  has_many :categories, through: :video_categories
+
   validates :title, presence: true
   validates :title, uniqueness: true
   validates :title, length: { maximum: 200, minimum: 2}
