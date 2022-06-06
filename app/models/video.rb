@@ -15,7 +15,9 @@ class Video < ApplicationRecord
 
   belongs_to :course
   has_many :video_categories
-  has_many :categories, through: :video_categories
+  has_many :categories, -> { order('id desc') }, through: :video_categories, after_add: :new_category
+
+  has_many :comments, as: :commentable
 
   validates :title, presence: true
   validates :title, uniqueness: true
@@ -31,6 +33,9 @@ class Video < ApplicationRecord
   scope :has_description_duration, -> { has_description.has_duration }
 
   private
+  def new_category(category)
+    puts "Se añadio al video #{title} la categoria #{category.title}"
+  end
   def show_title
     puts "nos encontramos en el metodo show_title"
   end
